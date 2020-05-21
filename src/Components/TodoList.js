@@ -1,13 +1,21 @@
-import React, { Component } from 'react';
-import Header from './Header';
-import TodoItem from './TodoItem';
-import './Styles.css';
-import Form from './Form';
+import React from "react";
+import TodoItem from "./TodoItem";
 
-class TodoList extends Component {
-	render(props) {
-		return <></>;
-	}
+function TodoList(props) {
+  return (
+    <div className="list-wrapper is-hoverable">
+      {props.todos.map((task, index) => {
+        return (
+          <TodoItem
+            task={task}
+            key={index}
+            id={index}
+            deleteTask={props.deleteTask}
+          />
+        );
+      })}
+    </div>
+  );
 }
 
 export default TodoList;

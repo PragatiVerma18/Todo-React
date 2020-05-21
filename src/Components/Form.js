@@ -1,38 +1,43 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
 class Form extends Component {
-	constructor(props) {
-		super(props);
+  constructor(props) {
+    super(props);
+    this.state = {
+      term: ""
+    };
+  }
 
-		this.state = {
-			term: '',
-		};
-	}
+  handleChange = event => {
+    const { name, value } = event.target;
+    this.setState({
+      [name]: value
+    });
+  };
 
-	onChangeHandler = (event) => {
-		this.setState({
-			term: event.target.value,
-		});
-	};
+  handleSubmit = e => {
+    e.preventDefault();
+    this.props.addTask(this.state.term);
+    this.setState({
+      term: ""
+    });
+  };
 
-	handleSubmit = (task) => {
-		this.setState({ tasks: [...this.state.tasks, task] });
-	};
-
-	render() {
-		return (
-			<form onFormSubmit={this.handleSubmit}>
-				<input
-					type='text'
-					className='input'
-					placeholder='Enter Item'
-					value={this.state.term}
-					onChange={this.onChangeHandler}
-				/>
-				<button className='button'>Submit</button>
-			</form>
-		);
-	}
+  render() {
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <input
+          type="text"
+          className="input"
+          placeholder="Enter Item"
+          name="term"
+          value={this.state.term}
+          onChange={this.handleChange}
+        />
+        <button className="button">Submit</button>
+      </form>
+    );
+  }
 }
 
 export default Form;
